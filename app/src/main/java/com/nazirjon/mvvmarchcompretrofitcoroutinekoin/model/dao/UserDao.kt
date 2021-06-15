@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import org.pbreakers.mobile.androidtest.udacity.model.entity.GithubUser
+import com.nazirjon.mvvmarchcompretrofitcoroutinekoin.model.entity.GithubUser
 
 @Dao
 interface UserDao {

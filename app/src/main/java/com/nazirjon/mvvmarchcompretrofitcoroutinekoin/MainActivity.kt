@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
 
         userViewModel.data.observe(this, Observer {
             // Todo: Populate the recyclerView here
-            it.forEach { githubUser ->
-                Toast.makeText(baseContext, githubUser.login, Toast.LENGTH_SHORT).show()
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                it.forEach { githubUser ->
+                    Toast.makeText(baseContext, githubUser.login, Toast.LENGTH_SHORT).show()
+                }
             }
         })
 

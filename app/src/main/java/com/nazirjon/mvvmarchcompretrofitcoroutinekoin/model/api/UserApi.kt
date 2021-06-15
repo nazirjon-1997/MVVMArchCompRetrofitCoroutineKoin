@@ -1,7 +1,7 @@
 package com.nazirjon.mvvmarchcompretrofitcoroutinekoin.model.api
 
+import com.nazirjon.mvvmarchcompretrofitcoroutinekoin.model.entity.GithubUser
 import kotlinx.coroutines.Deferred
-import org.pbreakers.mobile.androidtest.udacity.model.entity.GithubUser
 import retrofit2.http.GET
 
 interface UserApi {
