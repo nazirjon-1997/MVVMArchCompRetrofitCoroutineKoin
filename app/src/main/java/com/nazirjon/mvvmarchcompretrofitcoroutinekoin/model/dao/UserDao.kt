@@ -9,7 +9,6 @@ import com.nazirjon.mvvmarchcompretrofitcoroutinekoin.model.entity.GithubUser
 
 @Dao
 interface UserDao {
-
     @Query("SELECT * FROM users")
     fun findAll(): LiveData<List<GithubUser>>
 

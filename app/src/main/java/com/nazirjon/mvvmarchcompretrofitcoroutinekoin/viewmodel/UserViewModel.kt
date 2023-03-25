@@ -11,8 +11,7 @@ import kotlinx.coroutines.launch
 class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _loadingState = MutableLiveData<LoadingState>()
-    val loadingState: LiveData<LoadingState>
-        get() = _loadingState
+    val loadingState: LiveData<LoadingState> get() = _loadingState
 
     val data = userRepository.data
 

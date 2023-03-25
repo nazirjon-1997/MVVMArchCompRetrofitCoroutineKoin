@@ -23,7 +23,6 @@ val viewModelModule = module {
     single { UserViewModel(get()) }
 }
 
-
 val apiModule = module {
     fun provideUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
@@ -74,7 +73,6 @@ val databaseModule = module {
             .allowMainThreadQueries()
             .build()
     }
-
 
     fun provideDao(database: AppDatabase): UserDao {
         return database.userDao
