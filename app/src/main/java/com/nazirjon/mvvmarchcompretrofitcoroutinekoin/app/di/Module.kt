@@ -14,20 +14,17 @@ import com.nazirjon.mvvmarchcompretrofitcoroutinekoin.viewmodel.UserViewModel
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val viewModelModule = module {
-    single { UserViewModel(get()) }
+    viewModel { UserViewModel(get()) }
 }
 
 val apiModule = module {
-    fun provideUserApi(retrofit: Retrofit): UserApi {
-        return retrofit.create(UserApi::class.java)
-    }
-
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
     single { provideUserApi(get()) }
 }
 
@@ -38,16 +35,11 @@ val netModule = module {
     }
 
     fun provideHttpClient(cache: Cache): OkHttpClient {
-        val okHttpClientBuilder = OkHttpClient.Builder()
-            .cache(cache)
-
+        val okHttpClientBuilder = OkHttpClient.Builder().cache(cache)
         return okHttpClientBuilder.build()
     }
 
-    fun provideGson(): Gson {
-        return GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
-    }
-
+    fun provideGson(): Gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
 
     fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -66,7 +58,6 @@ val netModule = module {
 }
 
 val databaseModule = module {
-
     fun provideDatabase(application: Application): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, "eds.database")
             .fallbackToDestructiveMigration()
@@ -74,18 +65,13 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideDao(database: AppDatabase): UserDao {
-        return database.userDao
-    }
+    fun provideDao(database: AppDatabase): UserDao = database.userDao
 
     single { provideDatabase(androidApplication()) }
     single { provideDao(get()) }
 }
 
 val repositoryModule = module {
-    fun provideUserRepository(api: UserApi, dao: UserDao): UserRepository {
-        return UserRepository(api, dao)
-    }
-
+    fun provideUserRepository(api: UserApi, dao: UserDao): UserRepository = UserRepository(api, dao)
     single { provideUserRepository(get(), get()) }
 }

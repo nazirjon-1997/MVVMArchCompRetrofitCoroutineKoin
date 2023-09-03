@@ -9,9 +9,5 @@ data class LoadingState private constructor(val status: Status, val msg: String?
         fun error(msg: String?) = LoadingState(Status.FAILED, msg)
     }
 
-    enum class Status {
-        RUNNING,
-        SUCCESS,
-        FAILED
-    }
+    enum class Status { RUNNING, SUCCESS, FAILED }
 }

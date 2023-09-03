@@ -19,15 +19,13 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         fetchData()
     }
 
-    private fun fetchData() {
-        viewModelScope.launch {
-            try {
-                _loadingState.value = LoadingState.LOADING
-                userRepository.refresh()
-                _loadingState.value = LoadingState.LOADED
-            } catch (e: Exception) {
-                _loadingState.value = LoadingState.error(e.message)
-            }
+    private fun fetchData() = viewModelScope.launch {
+        try {
+            _loadingState.value = LoadingState.LOADING
+            userRepository.refresh()
+            _loadingState.value = LoadingState.LOADED
+        } catch (e: Exception) {
+            _loadingState.value = LoadingState.error(e.message)
         }
     }
 }
